@@ -7,11 +7,9 @@ on:
 
 jobs:
   deploy:
-
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -22,7 +20,16 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/node-cicd-demo
-            git pull origin main
+            cd ~/node-cicd-demo/aws-ec2-cicd
+
+            echo "Getting latest code..."
+            git fetch origin
+            git reset --hard origin/main
+
+            echo "Installing dependencies..."
             npm install
+
+            echo "Restarting application..."
             pm2 restart node-cicd-demo
+
+            echo "Deployment completed!"
