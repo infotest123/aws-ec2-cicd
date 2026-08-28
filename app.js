@@ -1,24 +1,18 @@
-const express = require("express");
-
-const app = express();
+const http = require("http");
 
 const PORT = 3000;
 
-app.get("/", (req, res) => {
-    res.send(`
-        <h1>Hello from AWS EC2 🚀</h1>
-        <p>GitHub Actions CI/CD deployment is working!</p>
-        <p>Version: 1.0</p>
+const server = http.createServer((req, res) => {
+    res.writeHead(200, {
+        "Content-Type": "text/html"
+    });
+
+    res.end(`
+        <h1>Hello from Node.js!</h1>
+        <p>Application deployed using GitHub Actions → AWS EC2</p>
     `);
 });
 
-app.get("/health", (req, res) => {
-    res.status(200).json({
-        status: "UP",
-        message: "Application is healthy"
-    });
-});
-
-app.listen(PORT, () => {
-    console.log(`Application running on port ${PORT}`);
+server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });

@@ -1,13 +1,18 @@
 {
-  "name": "aws-ec2-cicd",
-  "version": "1.0.0",
-  "description": "Node.js application deployed to AWS EC2 using GitHub Actions",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js",
-    "test": "node -e \"console.log('Application test passed')\""
-  },
-  "dependencies": {
-    "express": "^4.21.2"
-  }
+"name": "node-cicd-demo",
+"version": "1.0.0",
+"description": "Simple Node.js application for GitHub Actions and AWS EC2 CI/CD",
+"main": "app.js",
+"scripts": {
+"start": "node app.js"
+},
+"keywords": [
+"nodejs",
+"github-actions",
+"aws",
+"ec2",
+"cicd"
+],
+"author": "",
+"license": "ISC"
 }
