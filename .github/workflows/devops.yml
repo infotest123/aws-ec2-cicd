@@ -21,7 +21,7 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/node-cicd-demo/aws-ec2-cicd
+            cd /home/ec2-user/node-cicd-demo/aws-ec2-cicd
 
             echo "Getting latest code..."
             git fetch origin
@@ -31,6 +31,6 @@ jobs:
             npm install
 
             echo "Restarting application..."
-            pm2 restart node-cicd-demo
+            pm2 restart node-cicd-demo --update-env
 
             echo "Deployment completed!"
