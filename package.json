@@ -1,18 +1,30 @@
+// {
+// "name": "node-cicd-demo",
+// "version": "1.0.0",
+// "description": "Simple Node.js application for GitHub Actions and AWS EC2 CI/CD",
+// "main": "app.js",
+// "scripts": {
+// "start": "node app.js"
+// },
+// "keywords": [
+// "nodejs",
+// "github-actions",
+// "aws",
+// "ec2",
+// "cicd"
+// ],
+// "author": "",
+// "license": "ISC"
+// }
+
 {
-"name": "node-cicd-demo",
-"version": "1.0.0",
-"description": "Simple Node.js application for GitHub Actions and AWS EC2 CI/CD",
-"main": "app.js",
-"scripts": {
-"start": "node app.js"
-},
-"keywords": [
-"nodejs",
-"github-actions",
-"aws",
-"ec2",
-"cicd"
-],
-"author": "",
-"license": "ISC"
+  "name": "node-cicd-demo",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
