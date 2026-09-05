@@ -21,16 +21,37 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            set -e
+
+            echo "======================================"
+            echo "Starting deployment..."
+            echo "======================================"
+
             cd /home/ec2-user/node-cicd-demo/aws-ec2-cicd
 
-            echo "Getting latest code..."
-            git fetch origin
+            echo "1. Getting latest code..."
+            git fetch origin main
             git reset --hard origin/main
+            git clean -fd
 
-            echo "Installing dependencies..."
+            echo "2. Checking deployed commit..."
+            git rev-parse HEAD
+            git log -1 --oneline
+
+            echo "3. Installing dependencies..."
             npm install
 
-            echo "Restarting application..."
-            pm2 restart node-cicd-demo --update-env
+            echo "4. Restarting PM2 application..."
 
-            echo "Deployment completed!"
+            if pm2 describe node-cicd-demo > /dev/null 2>&1; then
+                pm2 restart node-cicd-demo --update-env
+            else
+                pm2 start app.js --name node-cicd-demo
+            fi
+
+            pm2 save
+
+            echo "5. Checking PM2 status..."
+            pm2 status
+
+            echo "6. Deployment completed successfully!"
