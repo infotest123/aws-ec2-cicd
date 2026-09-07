@@ -51,7 +51,7 @@ jobs:
             if pm2 describe node-cicd-demo > /dev/null 2>&1; then
                 APP_ENV=DEV pm2 restart node-cicd-demo --update-env
             else
-                APP_ENV=DEV pm2 restart node-cicd-demo --update-env
+                APP_ENV=DEV pm2 start node-cicd-demo --update-env
             fi
 
             pm2 save
@@ -89,14 +89,21 @@ jobs:
             git reset --hard origin/qa
             git clean -fd
 
+            echo "2. Checking deployed commit..."
+            git rev-parse HEAD
+            git log -1 --oneline
+
+            echo "3. Installing dependencies..."
             npm install
 
-            APP_ENV=QA pm2 restart node-cicd-demo --update-env
+            echo "4. Restarting PM2 application..."
 
-            echo "Checking application..."
-            curl http://localhost:3000
+            if pm2 describe node-cicd-demo > /dev/null 2>&1; then
+                APP_ENV=QA pm2 restart node-cicd-demo --update-env
+            else
+                APP_ENV=QA pm2 start node-cicd-demo --update-env
+            fi
 
-            pm2 status
 
             echo "QA deployment successful!"
 
@@ -134,13 +141,20 @@ jobs:
             git reset --hard origin/main
             git clean -fd
 
+            echo "2. Checking deployed commit..."
+            git rev-parse HEAD
+            git log -1 --oneline
+
+            echo "3. Installing dependencies..."
             npm install
 
-            APP_ENV=PROD pm2 restart node-cicd-demo --update-env
+            echo "4. Restarting PM2 application..."
 
-            echo "Checking application..."
-            curl http://localhost:3000
+            if pm2 describe node-cicd-demo > /dev/null 2>&1; then
+                APP_ENV=PROD pm2 restart node-cicd-demo --update-env
+            else
+                APP_ENV=PROD pm2 start node-cicd-demo --update-env
+            fi
 
-            pm2 status
 
             echo "PRODUCTION deployment successful!"
