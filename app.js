@@ -1,6 +1,7 @@
 const http = require("http");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+const APP_ENV = process.env.APP_ENV || "DEV";
 
 const server = http.createServer((req, res) => {
     res.writeHead(200, {
@@ -8,11 +9,35 @@ const server = http.createServer((req, res) => {
     });
 
     res.end(`
-        <h1>Hello from Node.js team this is cicd to automate application deployment</h1>
+        <h1>Hello this is ${APP_ENV} env !!</h1>
         <p>Application deployed using GitHub Actions → AWS EC2</p>
+        <p>Environment: <strong>${APP_ENV}</strong></p>
     `);
 });
 
 server.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on port ${PORT}`);
+    console.log(`Environment: ${APP_ENV}`);
 });
+
+
+
+// const express = require("express");
+
+// const app = express();
+
+// const PORT = process.env.PORT || 3000;
+// const ENV = process.env.APP_ENV || "DEV";
+
+// app.get("/", (req, res) => {
+//   res.send(`Hello Team - Environment: ${ENV}`);
+// });
+
+// app.get("/health", (req, res) => {
+//   res.status(200).send("OK");
+// });
+
+// app.listen(PORT, () => {
+//   console.log(`Application running on port ${PORT}`);
+// });
+
