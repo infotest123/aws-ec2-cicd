@@ -1,6 +1,7 @@
 const http = require("http");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+const APP_ENV = process.env.APP_ENV || "DEV";
 
 const server = http.createServer((req, res) => {
     res.writeHead(200, {
@@ -8,15 +9,16 @@ const server = http.createServer((req, res) => {
     });
 
     res.end(`
-        <h1>Hello this is Dev env</h1>
+        <h1>Hello this is ${APP_ENV} env</h1>
         <p>Application deployed using GitHub Actions → AWS EC2</p>
+        <p>Environment: <strong>${APP_ENV}</strong></p>
     `);
 });
 
 server.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on port ${PORT}`);
+    console.log(`Environment: ${APP_ENV}`);
 });
-
 
 
 
