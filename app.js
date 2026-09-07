@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
     });
 
     res.end(`
-        <h1>Hello this is ${APP_ENV} env !!</h1>
+        <h1>Hello this is ${APP_ENV} env ###</h1>
         <p>Application deployed using GitHub Actions → AWS EC2</p>
         <p>Environment: <strong>${APP_ENV}</strong></p>
     `);
