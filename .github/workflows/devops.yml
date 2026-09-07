@@ -38,15 +38,23 @@ jobs:
             git fetch origin dev
             git reset --hard origin/dev
             git clean -fd
+            
+            echo "2. Checking deployed commit..."
+            git rev-parse HEAD
+            git log -1 --oneline
 
+            echo "3. Installing dependencies..."
             npm install
 
-            APP_ENV=DEV pm2 restart node-cicd-demo --update-env
+            echo "4. Restarting PM2 application..."
 
-            echo "Checking application..."
-            curl http://localhost:3000
+            if pm2 describe node-cicd-demo > /dev/null 2>&1; then
+                APP_ENV=DEV pm2 restart node-cicd-demo --update-env
+            else
+                APP_ENV=DEV pm2 restart node-cicd-demo --update-env
+            fi
 
-            pm2 status
+            pm2 save
 
             echo "DEV deployment successful!"
 
