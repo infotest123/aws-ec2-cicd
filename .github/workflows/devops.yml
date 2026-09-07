@@ -33,7 +33,7 @@ jobs:
 
             echo "Deploying to DEV..."
 
-            cd /home/ec2-user/node-cicd-demo
+            cd /home/ec2-user/node-cicd-demo/aws-ec2-cicd
 
             git fetch origin dev
             git reset --hard origin/dev
@@ -75,7 +75,7 @@ jobs:
 
             echo "Deploying to QA..."
 
-            cd /home/ec2-user/node-cicd-demo
+            cd /home/ec2-user/node-cicd-demo/aws-ec2-cicd
 
             git fetch origin qa
             git reset --hard origin/qa
@@ -120,7 +120,7 @@ jobs:
 
             echo "Deploying to PROD..."
 
-            cd /home/ec2-user/node-cicd-demo
+            cd /home/ec2-user/node-cicd-demo/aws-ec2-cicd
 
             git fetch origin main
             git reset --hard origin/main
