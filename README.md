@@ -231,5 +231,33 @@ app.listen(PORT, () => {
 }
 
 
+
 APP_ENV=DEV pm2 start app.js --name node-cicd-demo
+APP_ENV=QA pm2 start app.js --name node-cicd-demo
+APP_ENV=PROD pm2 start app.js --name node-cicd-demo 
+
+best practise
+deve - dev branch
+all good
+
+dev - qa 
+tester said all ok from qa side 
+
+qa - main(prod) - approval gate 
+
+if pipeline fails troubleshooting steps
+
+pipeline error or log
+check password,or key expired or not
+code deployed correct or not 
+port opened or not ec2
+server up and running or not
+yml indentation issues pipeline not running
+
+devops day to day tasks
+setup dev,qa prod env
+resolve pipeline issues
+add reviewrers
+set ec2 machine for dev ,qa prod env
+
 
